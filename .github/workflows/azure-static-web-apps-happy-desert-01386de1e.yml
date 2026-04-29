@@ -45,3 +45,4 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_HAPPY_DESERT_01386DE1E }}
           action: "close"
           app_location: "src" # App source code path
+          api_location: "swa-db-connections" # Api

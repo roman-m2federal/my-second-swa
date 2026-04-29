@@ -1,0 +1,8 @@
+{
+  "configurations": {
+    "app": {
+      "appLocation": "src",
+      "dataApiLocation": "swa-db-connections"
+    }
+  }
+}
