@@ -30,7 +30,7 @@
   },
   "entities": {
     "Greeting": {
-      "source": "dbo.hellos",
+      "source": "dbo.hellos2",
       "permissions": [
         {
           "actions": ["read"],
