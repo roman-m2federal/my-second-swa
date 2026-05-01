@@ -122,7 +122,9 @@
 </div>
 
     </main>
+
     <script>
+    /*
     async function list() {
     const endpoint = '/rest/Greeting';
     try {
@@ -149,6 +151,43 @@
         console.error('Error:', error);
         document.getElementById("greeting-display").textContent = 'Error: ' + error.message;
     }
+}
+    */
+   
+async function list() {
+  const endpoint = '/rest/Greeting';
+
+  try {
+    const response = await fetch(endpoint);
+    console.log('Response status:', response.status);
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Parsed data:', data);
+
+    const ilang = document.getElementById("lang_select").value;
+
+    const item = data.value.find(
+      item => item.language === ilang
+    );
+
+    if (!item) {
+      document.getElementById("greeting-display").textContent =
+        'Greeting not found for selected language';
+      return;
+    }
+
+    document.getElementById("greeting-display").textContent =
+      item.greeting;
+
+  } catch (error) {
+    console.error('Error:', error);
+    document.getElementById("greeting-display").textContent =
+      'Error: ' + error.message;
+  }
 }
     </script>
 </body>
