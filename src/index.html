@@ -126,7 +126,7 @@
     <script>
     
     async function list() {
-    const endpoint = '/rest/Greeting';
+    const endpoint = '/data-api/rest/Greeting';
     try {
         const response = await fetch(endpoint);
         console.log('Response status:', response.status);
@@ -143,10 +143,10 @@
         console.log('Parsed data:', data);
 
         const ilang = document.getElementById("lang_select").value;
-        const langindex = data.value.findIndex(item => item.language === ilang);
+        const langindex = data.value.findIndex(item => item.Language === ilang);
         console.log(ilang);
         console.log(langindex);
-        document.getElementById("greeting-display").textContent=data.value[langindex].greeting;
+        document.getElementById("greeting-display").textContent=data.value[langindex].Greeting;
     } catch (error) {
         console.error('Error:', error);
         document.getElementById("greeting-display").textContent = 'Error: ' + error.message;
