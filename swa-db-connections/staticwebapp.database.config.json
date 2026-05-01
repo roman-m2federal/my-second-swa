@@ -41,3 +41,4 @@
     }
   }
 }
+//azure changed it so that you can't go settings->database connection->production->link database like the tutorial says, maybe this has something to do with why it's not working...
