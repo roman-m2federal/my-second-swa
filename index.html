@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Vanilla JavaScript App</title>
+</head>
+
+<body>
+    <main>
+    <h1 id="greeting-display">👋</h1>
+    <label for="languages">test Choose a language:</label>
+
+<select name="language" id="lang_select">
+<option value='Afrikaans'>Afrikaans</option>
+<option value='Albanian'>Albanian</option>
+<option value='Amharic'>Amharic</option>
+<option value='Arabic'>Arabic</option>
+<option value='Armenian'>Armenian</option>
+<option value='Azerbaijani'>Azerbaijani</option>
+<option value='Basque'>Basque</option>
+<option value='Bengali'>Bengali</option>
+<option value='Bhutanese'>Bhutanese</option>
+<option value='Bosnian'>Bosnian</option>
+<option value='Bulgarian'>Bulgarian</option>
+<option value='Burmese'>Burmese</option>
+<option value='Cambodian/Khmer'>Cambodian/Khmer</option>
+<option value='Cantonese Chinese'>Cantonese Chinese</option>
+<option value='Chichewa'>Chichewa</option>
+<option value='Croatian'>Croatian</option>
+<option value='Czech'>Czech</option>
+<option value='Danish'>Danish</option>
+<option value='Dutch'>Dutch</option>
+<option value='English'>English</option>
+<option value='Estonian'>Estonian</option>
+<option value='Farsi/Persian'>Farsi/Persian</option>
+<option value='Fijian'>Fijian</option>
+<option value='Finnish'>Finnish</option>
+<option value='French'>French</option>
+<option value='Georgian'>Georgian</option>
+<option value='German'>German</option>
+<option value='Greek'>Greek</option>
+<option value='Hausa'>Hausa</option>
+<option value='Hawaiian'>Hawaiian</option>
+<option value='Hebrew'>Hebrew</option>
+<option value='Hmong'>Hmong</option>
+<option value='Hungarian'>Hungarian</option>
+<option value='Icelandic'>Icelandic</option>
+<option value='Igbo'>Igbo</option>
+<option value='Indonesian'>Indonesian</option>
+<option value='Italian'>Italian</option>
+<option value='Japanese'>Japanese</option>
+<option value='Kannada'>Kannada</option>
+<option value='Kazakh'>Kazakh</option>
+<option value='Khmu'>Khmu</option>
+<option value='Kinyarwanda'>Kinyarwanda</option>
+<option value='Kiribati'>Kiribati</option>
+<option value='Korean'>Korean</option>
+<option value='Kyrgyz'>Kyrgyz</option>
+<option value='Lao'>Lao</option>
+<option value='Latvian'>Latvian</option>
+<option value='Lithuanian'>Lithuanian</option>
+<option value='Luganda'>Luganda</option>
+<option value='Macedonian'>Macedonian</option>
+<option value='Malagasy'>Malagasy</option>
+<option value='Malay'>Malay</option>
+<option value='Malayalam'>Malayalam</option>
+<option value='Mandarin Chinese'>Mandarin Chinese</option>
+<option value='Māori'>Māori</option>
+<option value='Marshallese'>Marshallese</option>
+<option value='Mongolian'>Mongolian</option>
+<option value='Ndebele'>Ndebele</option>
+<option value='Nepali'>Nepali</option>
+<option value='Norwegian'>Norwegian</option>
+<option value='Nyanja'>Nyanja</option>
+<option value='Oromo'>Oromo</option>
+<option value='Polish'>Polish</option>
+<option value='Portuguese'>Portuguese</option>
+<option value='Punjabi'>Punjabi</option>
+<option value='Romanian'>Romanian</option>
+<option value='Russian'>Russian</option>
+<option value='Samoan'>Samoan</option>
+<option value='Serbian'>Serbian</option>
+<option value='Sesotho'>Sesotho</option>
+<option value='Setswana'>Setswana</option>
+<option value='Shona'>Shona</option>
+<option value='Sinhala'>Sinhala</option>
+<option value='Slovak'>Slovak</option>
+<option value='Slovenian'>Slovenian</option>
+<option value='Somali'>Somali</option>
+<option value='Spanish'>Spanish</option>
+<option value='Sranan Tongo'>Sranan Tongo</option>
+<option value='Swahili'>Swahili</option>
+<option value='Swati'>Swati</option>
+<option value='Swedish'>Swedish</option>
+<option value='Tagalog/Filipino'>Tagalog/Filipino</option>
+<option value='Tahitian'>Tahitian</option>
+<option value='Tajik'>Tajik</option>
+<option value='Tamil'>Tamil</option>
+<option value='Telugu'>Telugu</option>
+<option value='Thai'>Thai</option>
+<option value='Tigrinya'>Tigrinya</option>
+<option value='Tongan'>Tongan</option>
+<option value='Turkish'>Turkish</option>
+<option value='Turkmen'>Turkmen</option>
+<option value='Ukrainian'>Ukrainian</option>
+<option value='Urdu'>Urdu</option>
+<option value='Uzbek'>Uzbek</option>
+<option value='Vietnamese'>Vietnamese</option>
+<option value='Wolof'>Wolof</option>
+<option value='Xhosa'>Xhosa</option>
+<option value='Xitsonga'>Xitsonga</option>
+<option value='Yoruba'>Yoruba</option>
+<option value='Zulu'>Zulu</option>
+
+</select>
+
+<div>
+    <button id="list" onclick="list()">Greet</button>
+</div>
+
+    </main>
+
+    <script>
+    
+    async function list() {
+    const endpoint = '/data-api/rest/Greeting';
+    try {
+        const response = await fetch(endpoint);
+        console.log('Response status:', response.status);
+        const text = await response.text();
+        console.log('Response text:', text);
+
+        if (!text) {
+            console.error('Empty response from API');
+            document.getElementById("greeting-display").textContent = 'Error: No data from API';
+            return;
+        }
+
+        const data = JSON.parse(text);
+        console.log('Parsed data:', data);
+
+        const ilang = document.getElementById("lang_select").value;
+        const langindex = data.value.findIndex(item => item.Language === ilang);
+        console.log(ilang);
+        console.log(langindex);
+        document.getElementById("greeting-display").textContent=data.value[langindex].Greeting;
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById("greeting-display").textContent = 'Error: ' + error.message;
+    }
+}
+    
+
+    </script>
+</body>
+
+<!--  
+
+  <script>
+    (async function() {
+        const { text } = await( await fetch(`/api/httpTrigger1`)).json();
+        document.querySelector('#name').textContent = text;
+    }());
+    </script>
+
+-->
+
+<!-- //azure changed it so that you can't go settings->database connection->production->link database like the tutorial says, maybe this has something to do with why it's not working...-->
+
+</html>
