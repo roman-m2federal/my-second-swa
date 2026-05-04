@@ -130,26 +130,26 @@
     try {
         const response = await fetch(endpoint);
         console.log('Response status:', response.status);
-        const text = await response.text();
-        console.log('Response text:', text);
+        const result = await response.json();
+        console.log('Response result:', result);
 
-        if (!text) {
+        if (!result) {
             console.error('Empty response from API');
-            document.getElementById("greeting-display").textContent = 'Error: No data from API';
+            document.getElementById("greeting-display").resultContent = 'Error: No data from API';
             return;
         }
 
-        const data = JSON.parse(text);
+        const data = JSON.parse(result);
         console.log('Parsed data:', data);
 
         const ilang = document.getElementById("lang_select").value;
         const langindex = data.value.findIndex(item => item.Language === ilang);
         console.log(ilang);
         console.log(langindex);
-        document.getElementById("greeting-display").textContent=data.value[langindex].Greeting;
+        document.getElementById("greeting-display").resultContent=data.value[langindex].Greeting;
     } catch (error) {
         console.error('Error:', error);
-        document.getElementById("greeting-display").textContent = 'Error: ' + error.message;
+        document.getElementById("greeting-display").resultContent = 'Error: ' + error.message;
     }
 }
     
@@ -168,5 +168,6 @@
 
 -->
 
+<!--//azure changed it so that you can't go settings->database connection->production->link database like the tutorial says, maybe this has something to do with why it's not working...-->
 
 </html>
